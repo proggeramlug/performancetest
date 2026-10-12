@@ -1,4 +1,5 @@
 bin/
 bench.js
+bench-arena.js
 node_modules/
 tools/
