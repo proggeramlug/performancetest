@@ -1,0 +1,4 @@
+bin/
+bench.js
+node_modules/
+tools/

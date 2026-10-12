@@ -1,0 +1,11 @@
+load before run: 1.00
+load after node RSS run: 1.00
+load after go RSS run: 1.00
+load after rust RSS run: 1.00
+load after rust-arena RSS run: 1.00
+load after cpp RSS run: 1.00
+load after cpp-arena RSS run: 1.00
+load after perry RSS run: 1.00
+load after scriptc RSS run: 5.41
+load after porffor RSS run: 5.39
+load after hyperfine: 18.76

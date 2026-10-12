@@ -1,0 +1,1 @@
+WRAP: taskset -c 6,7,14,15 nice -n -10

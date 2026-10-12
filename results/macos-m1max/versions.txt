@@ -1,0 +1,15 @@
+date: 2026-10-12T03:39Z
+os: Darwin 25.5.0 arm64
+cpu: Apple M1 Max, 10 cores
+node: v26.5.1
+perry: perry 0.5.1659
+perry-commit: 996bc5d629dfbc4b0e99a377b6eeab57c32e54c6 (2026-10-12 04:40:53 +0200)
+perry-lib: libperry_runtime.a Oct 12 05:38
+perry-lib: libperry_stdlib.a Oct 12 05:38
+perry-env: PERRY_NO_AUTO_OPTIMIZE=1
+scriptc: 0.2.0
+porffor: alpha 13 (547c781 2026-09-30)
+go: go version go1.21.3 darwin/arm64
+rustc: rustc 1.97.1 (8bab26f4f 2026-07-14) (-C opt-level=3)
+c++: Apple clang version 21.0.0 (clang-2100.1.1.101) (-O2 -std=c++17)
+hyperfine: hyperfine 1.20.0
