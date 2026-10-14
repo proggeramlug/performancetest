@@ -29,8 +29,8 @@ The program is the Benchmarks Game **binary-trees** shape, single-threaded, with
 | machine | Apple M1 Max, 10 cores (Darwin 25.5.0 arm64) | AMD Ryzen 7 7700X 8-Core Processor, 16 threads (Linux 6.17.0-23-generic x86_64) |
 | Node | v26.5.1 | v26.8.1 |
 | Perry | perry 0.5.1659 | perry 0.5.1659 |
-| Perry commit | 996bc5d629dfbc4b0e99a377b6eeab57c32e54c6 (2026-10-12 04:40:53 +0200) | 996bc5d629dfbc4b0e99a377b6eeab57c32e54c6 (2026-10-12 04:40:53 +0200) |
-| scriptc | 0.2.9 | 0.2.9 |
+| Perry commit | 7bdf9b9d3a8959b6965f997a32ea92b97dd0fa99 (2026-10-13 07:15:58 +0200) | 7bdf9b9d3a8959b6965f997a32ea92b97dd0fa99 (2026-10-13 07:15:58 +0200) |
+| scriptc | 0.3.0 | 0.3.0 |
 | Porffor | alpha 17 (731f1b2 2026-10-10) | alpha 17 (731f1b2 2026-10-10) |
 | Go | go1.21.3 darwin/arm64 | go1.21.3 linux/amd64 |
 | Swift | Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101) (-O) | Swift version 6.3.3 (swift-6.3.3-RELEASE) (-O) |
@@ -40,25 +40,25 @@ The program is the Benchmarks Game **binary-trees** shape, single-threaded, with
 | C++ compiler | Apple clang version 21.0.0 (clang-2100.1.1.101) (-O2 -std=c++17) | g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0 (-O2 -std=c++17) |
 | hyperfine | hyperfine 1.20.0 | hyperfine 1.20.0 |
 
-Perry was built from source with `cargo build --release -p perry -p perry-runtime-static -p perry-stdlib-static` and linked with `PERRY_NO_AUTO_OPTIMIZE=1` on both machines. Its runtime and stdlib archives were rebuilt at that commit; their timestamps are in each `versions.txt`. Perry (main), scriptc and Porffor are the latest versions as of 2026-10-12; this was checked. The other toolchains are what each machine had installed, or recent releases installed for this test. Go 1.21.3 is notably old. The two machines differ in Node (26.5.1 vs 26.8.1) and Rust (1.97.1 vs 1.98.0, stable on both).
+Measured 2026-10-13. Perry was built from source at main `7bdf9b9d3a` with `cargo build --release -p perry -p perry-runtime-static -p perry-stdlib-static` and linked with `PERRY_NO_AUTO_OPTIMIZE=1` on both machines. Its runtime and stdlib archives were rebuilt at that commit; their timestamps are in each `versions.txt`. Perry (main), scriptc and Porffor are the latest versions as of that date; this was checked. The other toolchains are what each machine had installed, or recent releases installed for this test. Go 1.21.3 is notably old. The two machines differ in Node (26.5.1 vs 26.8.1) and Rust (1.97.1 vs 1.98.0, stable on both).
 
 ## Results
 
-Times are the mean ± standard deviation of 3 hyperfine runs. "vs Node" is time relative to Node on the same machine, where lower is faster. RSS is peak resident memory from one run under `/usr/bin/time`. Rows are sorted by the average of the two "vs Node" columns.
+Times are the mean ± standard deviation of hyperfine runs. "vs Node" is time relative to Node on the same machine, where lower is faster. RSS is peak resident memory from one run under `/usr/bin/time`. Rows are sorted by the average of the two "vs Node" columns. All 15 builds print output identical to Node on both machines.
 
 ### Idiomatic code
 
 | implementation | macOS | vs Node | macOS RSS | Linux | vs Node | Linux RSS |
 |---|---:|---:|---:|---:|---:|---:|
-| Kotlin (JVM) | 5.28 s ± 1.12 | 0.82× | 2777 MB | 2.79 s ± 0.07 | 0.39× | 3102 MB |
-| scriptc | 7.61 s ± 0.03 | 1.19× | 257 MB | 5.65 s ± 0.04 | 0.79× | 258 MB |
-| Node | 6.42 s ± 0.09 | 1.00× | 1482 MB | 7.12 s ± 0.06 | 1.00× | 1472 MB |
-| **Perry** | 10.66 s ± 0.09 | 1.66× | 659 MB | 10.72 s ± 0.08 | 1.51× | 594 MB |
-| Rust (Box) | 12.18 s ± 0.12 | 1.90× | 130 MB | 9.31 s ± 0.19 | 1.31× | 258 MB |
-| C++ (unique_ptr) | 13.49 s ± 0.07 | 2.10× | 130 MB | 8.55 s ± 0.34 | 1.20× | 260 MB |
-| Go | 14.52 s ± 0.44 | 2.26× | 254 MB | 13.55 s ± 0.07 | 1.90× | 187 MB |
-| Swift (ARC) | 23.45 s ± 0.24 | 3.65× | 259 MB | 15.81 s ± 0.74 | 2.22× | 393 MB |
-| Porffor | 59.58 s ± 1.71 | 9.29× | 704 MB | 54.29 s ± 1.23 | 7.63× | 756 MB |
+| Kotlin (JVM) | 3.22 s ± 0.52 | 0.50× | 5782 MB | 2.72 s ± 0.02 | 0.41× | 3242 MB |
+| scriptc | 7.75 s ± 0.12 | 1.20× | 257 MB | 4.97 s ± 0.06 | 0.75× | 260 MB |
+| Node | 6.45 s ± 0.29 | 1.00× | 1481 MB | 6.59 s ± 0.01 | 1.00× | 1472 MB |
+| **Perry** | 7.93 s ± 0.10 | 1.23× | 666 MB | 5.97 s ± 0.01 | 0.91× | 591 MB |
+| Rust (Box) | 12.30 s ± 0.01 | 1.91× | 130 MB | 8.39 s ± 0.05 | 1.27× | 258 MB |
+| C++ (unique_ptr) | 13.73 s ± 0.15 | 2.13× | 130 MB | 8.33 s ± 0.12 | 1.26× | 260 MB |
+| Go | 14.52 s ± 0.15 | 2.25× | 212 MB | 13.20 s ± 0.06 | 2.00× | 192 MB |
+| Swift (ARC) | 23.91 s ± 0.33 | 3.70× | 259 MB | 15.28 s ± 0.32 | 2.32× | 393 MB |
+| Porffor | 60.57 s ± 1.01 | 9.38× | 704 MB | 51.14 s ± 0.19 | 7.76× | 704 MB |
 
 ### Arena variants (hand-managed memory)
 
@@ -66,28 +66,28 @@ The Node row is repeated for reference.
 
 | implementation | macOS | vs Node | macOS RSS | Linux | vs Node | Linux RSS |
 |---|---:|---:|---:|---:|---:|---:|
-| Rust arena | 2.06 s ± 0.01 | 0.32× | 100 MB | 1.60 s ± 0.02 | 0.22× | 98 MB |
-| C++ arena | 2.63 s ± 0.00 | 0.41× | 165 MB | 2.23 s ± 0.00 | 0.31× | 131 MB |
-| scriptc, typed-array arena | 5.02 s ± 0.07 | 0.78× | 98 MB | 3.74 s ± 0.33 | 0.53× | 98 MB |
-| Node, typed-array arena | 6.92 s ± 0.02 | 1.08× | 154 MB | 4.54 s ± 0.20 | 0.64× | 149 MB |
-| Node | 6.42 s ± 0.09 | 1.00× | 1482 MB | 7.12 s ± 0.06 | 1.00× | 1472 MB |
-| Porffor, typed-array arena | 17.04 s ± 0.10 | 2.66× | 98 MB | 13.70 s ± 0.08 | 1.93× | 98 MB |
-| **Perry**, typed-array arena | 36.67 s ± 0.23 | 5.71× | 105 MB | 31.77 s ± 0.02 | 4.46× | 108 MB |
+| Rust arena | 2.10 s ± 0.00 | 0.33× | 102 MB | 1.55 s ± 0.02 | 0.23× | 98 MB |
+| C++ arena | 2.77 s ± 0.17 | 0.43× | 166 MB | 2.22 s ± 0.00 | 0.34× | 131 MB |
+| scriptc, typed-array arena | 4.99 s ± 0.06 | 0.77× | 98 MB | 3.35 s ± 0.01 | 0.51× | 98 MB |
+| Node, typed-array arena | 6.96 s ± 0.28 | 1.08× | 154 MB | 4.28 s ± 0.03 | 0.65× | 149 MB |
+| Node | 6.45 s ± 0.29 | 1.00× | 1481 MB | 6.59 s ± 0.01 | 1.00× | 1472 MB |
+| **Perry**, typed-array arena | 8.65 s ± 0.07 | 1.34× | 105 MB | 5.85 s ± 0.07 | 0.89× | 107 MB |
+| Porffor, typed-array arena | 17.75 s ± 1.06 | 2.75× | 98 MB | 13.40 s ± 0.00 | 2.03× | 98 MB |
 
 How the numbers were measured:
 
-- **macOS** is a working desktop with background load of about 7–14 on 10 cores. See [`results/macos-m1max/NOTE.md`](results/macos-m1max/NOTE.md).
-- **Linux** is a shared server. Each build was timed separately, pinned to 2 cores / 4 threads, and started at load below 3. See [`results/linux-ryzen7700x/NOTE.md`](results/linux-ryzen7700x/NOTE.md).
-- [`results/archive-v1`](results/archive-v1) has a superseded first round that used outdated scriptc and Porffor versions.
+- **Linux** is a shared server. Each build was timed separately (3 runs), pinned to 2 cores / 4 threads, and started at load below 3; actual load was 1.0–1.9. See [`results/linux-ryzen7700x/NOTE.md`](results/linux-ryzen7700x/NOTE.md).
+- **macOS** is a working desktop with background load of 5.6–13.3 on 10 cores. Node and Perry rows use a 5-run re-time; the others come from one 3-run pass. See [`results/macos-m1max/NOTE.md`](results/macos-m1max/NOTE.md). The Linux numbers are the cleaner reference.
+- Earlier rounds are kept in [`results/archive-v1`](results/archive-v1) and [`results/archive-v2`](results/archive-v2). Between round 2 (2026-10-12) and this round, Perry went from 10.7 s to 6.0 s (plain) and from 31.8 s to 5.8 s (arena) on Linux. That window includes four fixes that came out of profiling this benchmark (#12468, #12473, #12491, #12499) plus other work merged to main in the meantime.
 
 ## What it shows
 
-- **The arenas are the fastest by far.** Rust with an arena takes 1.6–2.1 s and about 100 MB. Freeing a whole tree at once beats every general-purpose allocator and GC on this workload.
-- **Kotlin/JVM is the fastest idiomatic build.** It is 1.2–2.6× faster than Node, but uses about 3 GB because the JVM claims up to ¼ of RAM by default. Node is next, at about 1.5 GB. Generational GCs allocate by bumping a pointer and drop dead young objects almost for free, which is exactly this workload.
-- **scriptc 0.2.9 is the fastest of the AOT TypeScript compilers here,** and uses only about 258 MB. That memory figure matches malloc/free Rust and C++ on Linux.
-- **Perry takes 1.5–1.7× Node's time with 40–45% of its memory.** It beats Go and Swift on both machines. Compared with malloc/free Rust and C++, it is faster on macOS and slower on Linux, where glibc malloc is much faster for this pattern.
-- **Swift (ARC) is the slowest of the non-JS languages here,** at 15.8–23.5 s. Every node creation and release updates a reference count.
-- **Porffor is 7.6–9.3× Node's time** on this workload.
+- **The Rust and C++ arenas are the fastest by far,** at 1.5–2.8 s and 100–170 MB. Freeing a whole tree at once beats every general-purpose allocator and GC on this workload.
+- **Kotlin/JVM is the fastest idiomatic build,** at 0.41–0.50× Node's time, but it uses 3.2–5.8 GB because the JVM claims up to ¼ of RAM by default.
+- **Perry beats Node on Linux (0.91×) and trails it on macOS (1.23×),** using 40–45% of Node's memory. It now beats malloc/free Rust and C++, Go and Swift on both machines.
+- **scriptc 0.3.0 is the fastest AOT TypeScript compiler here,** at 0.75× Node on Linux and 1.20× on macOS, with only about 258 MB. Version 0.2.9 used reference counting instead of a GC (seen in a profile); 0.3.0 shows the same memory pattern but was not re-profiled.
+- **Swift (ARC) is the slowest of the non-JS languages here,** at 2.3–3.7× Node. Every node creation and release updates a reference count.
+- **Porffor is 7.8–9.4× Node's time** on this workload.
 
 ## Speeding up the TypeScript versions
 
@@ -95,21 +95,20 @@ How the numbers were measured:
 
 | runtime | plain → arena (macOS) | plain → arena (Linux) | memory |
 |---|---|---|---|
-| Node | 6.42 → 6.92 s | 7.12 → 4.54 s | ~1480 → ~150 MB |
-| scriptc | 7.61 → 5.02 s | 5.65 → 3.74 s | ~258 → ~98 MB |
-| Porffor | 59.58 → 17.04 s | 54.29 → 13.70 s | ~700 → ~98 MB |
-| Perry | 10.66 → **36.67 s** | 10.72 → **31.77 s** | ~600 → ~105 MB |
+| Node | 6.45 → 6.96 s | 6.59 → 4.28 s | ~1480 → ~150 MB |
+| scriptc | 7.75 → 4.99 s | 4.97 → 3.35 s | ~258 → ~98 MB |
+| Porffor | 60.57 → 17.75 s | 51.14 → 13.40 s | ~704 → ~98 MB |
+| Perry | 7.93 → 8.65 s | 5.97 → 5.85 s | ~590–666 → ~106 MB |
 
 - **Memory drops 2.6–10× everywhere.** That is the dependable win.
-- **The speed gain depends on the runtime.** It is large for Porffor (3.5–4×), solid for scriptc, and mixed for Node: faster on Linux, slightly slower on macOS. V8's young-generation GC already does most of what the arena does.
-- **Perry gets 3.0–3.4× slower.** A small probe points at typed-array element access through class fields: the same code with module-level arrays ran about 3.3× faster. That is a Perry codegen issue, not a property of the approach.
-- Even the best TS arena (scriptc, 3.7–5.0 s) stays 2.3–2.4× behind the Rust arena. The likely causes are bounds-checked typed-array access and number semantics, but that was not profiled.
+- **The speed gain depends on the runtime.** It is large for Porffor (3.4–3.8×) and solid for scriptc (1.5×). For Node, it is faster on Linux and slightly slower on macOS. For Perry it is about even on Linux and slower on macOS, because Perry's plain version is already fast.
+- On 2026-10-12, Perry's arena version was 3× *slower* than its plain version. Measured individually on Linux, #12473 (`++` on class fields) cut its time by 61% and #12499 (direct typed-array element access) by another 54%.
 
 Other code-level options exist but were not measured here: object pooling (keep the `TreeNode` class, reuse instances from a free list), and avoiding the allocation altogether where the algorithm allows.
 
 ## Cost to write and to maintain
 
-The token figures come from the Claude Code session that wrote these files. Each one is the actual output tokens of the step that created the file, split across the files written in that step by character share. That share includes the model's reasoning in the step, so treat the figures as approximate. All of them are small: about 0.5–1.5k tokens per file. The whole session, including building toolchains, debugging the measurement setup and writing this README, used about 90k output tokens. Writing the code is cheap; the real differences are in the last two columns.
+The token figures come from the Claude Code session that wrote these files. Each one is the actual output tokens of the step that created the file, split across the files written in that step by character share. That share includes the model's reasoning in the step, so treat the figures as approximate. All of them are small: about 0.5–1.5k tokens per file. By the time the code was written, the whole session (including building toolchains and debugging the measurement setup) had used about 90k output tokens. Writing the code is cheap; the real differences are in the last two columns.
 
 | variant | code lines | ≈ tokens to write | who manages memory | what breaks when requirements change |
 |---|---:|---:|---|---|

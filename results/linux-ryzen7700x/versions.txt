@@ -1,13 +1,13 @@
-date: 2026-10-12T06:38Z
+date: 2026-10-13T06:08Z
 os: Linux 6.17.0-23-generic x86_64
 cpu: AMD Ryzen 7 7700X 8-Core Processor, 16 threads
 node: v26.8.1
 perry: perry 0.5.1659
-perry-commit: 996bc5d629dfbc4b0e99a377b6eeab57c32e54c6 (2026-10-12 04:40:53 +0200)
-perry-lib: libperry_runtime.a Oct 12 03:36
-perry-lib: libperry_stdlib.a Oct 12 03:36
+perry-commit: 7bdf9b9d3a8959b6965f997a32ea92b97dd0fa99 (2026-10-13 07:15:58 +0200)
+perry-lib: libperry_runtime.a Oct 13 06:07
+perry-lib: libperry_stdlib.a Oct 13 06:07
 perry-env: PERRY_NO_AUTO_OPTIMIZE=1
-scriptc: 0.2.9
+scriptc: 0.3.0
 porffor: alpha 17 (731f1b2 2026-10-10)
 go: go version go1.21.3 linux/amd64
 rustc: rustc 1.98.0 (88d9e12ae 2026-08-18) (-C opt-level=3)

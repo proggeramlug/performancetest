@@ -1,2 +1,4 @@
-swift 8.34 7.33
-kotlin 7.33 7.42
+node 4.40 5.43
+node-arena 5.43 4.95
+perry 4.95 4.45
+perry-arena 4.45 4.22
